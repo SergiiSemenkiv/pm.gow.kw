@@ -1,6 +1,5 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-  <!-- HERO START-->
-  <section class="hero hero-from-xl hero-biography">
+  <header class="hero hero-from-xl hero-biography">
     <div class="container-fluid">
       <div class="hero__wrapper">
         <div>
@@ -26,36 +25,15 @@
         </div>
       </div>
     </div>
-  </section>
-  <!-- HERO END-->
-
+  </header>
   <main class="page-main">
     <div class="container">
       <div class="row">
         <div class="col-12 col-xl-9 site-content__column">
-          <article class="static-content">
-            <div class="page-text">
-              <?php the_content(); ?>
-            </div>
-            <?php if (get_edit_post_link()) :
-              edit_post_link(
-                sprintf(
-                  wp_kses(
-                  /* translators: %s: Name of current post. Only visible to screen readers */
-                    __('Edit <span class="screen-reader-text">%s</span>', 'prime-minister'),
-                    array(
-                      'span' => array(
-                        'class' => array(),
-                      ),
-                    )
-                  ),
-                  wp_kses_post(get_the_title())
-                ),
-                '<span class="edit-link">',
-                '</span>'
-              );
-            endif; ?>
-          </article>
+          <section class="static-content">
+            <?php the_content(); ?>
+            <?php prime_minister_entry_footer(); ?>
+          </section>
         </div>
         {{> sidebar }}
       </div>

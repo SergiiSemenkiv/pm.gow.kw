@@ -51,6 +51,7 @@ function prime_minister_setup()
   register_nav_menus(
     array(
       'header_menu' => 'Header Menu',
+      'home_hero_menu' => 'Home hero menu',
       'footer_menu_column_1' => 'Footer Menu First Column',
       'footer_menu_column_2' => 'Footer Menu Second Column',
       'footer_static_pages_menu' => 'Footer Static Pages Menu',
@@ -188,7 +189,7 @@ if (defined('JETPACK__VERSION')) {
   require get_template_directory() . '/inc/jetpack.php';
 }
 
-//show_admin_bar(false);
+show_admin_bar(false);
 
 require get_template_directory() . '/inc/latest-sticky.php';
 
