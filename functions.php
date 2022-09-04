@@ -141,6 +141,28 @@ function prime_minister_widgets_init()
       'after_title' => '</h2>',
     )
   );
+  register_sidebar(
+    array(
+      'name' => esc_html__('Footer Widgets Area', 'prime-minister'),
+      'id' => 'footer_widget_area',
+      'description' => esc_html__('Add widgets here.', 'prime-minister'),
+      'before_widget' => '',
+      'after_widget' => '',
+      'before_title' => '<h2 class="widget-title">',
+      'after_title' => '</h2>',
+    )
+  );
+  register_sidebar(
+    array(
+      'name' => esc_html__('Footer Info', 'prime-minister'),
+      'id' => 'footer_info',
+      'description' => esc_html__('Add widgets here.', 'prime-minister'),
+      'before_widget' => '',
+      'after_widget' => '',
+      'before_title' => '<h2 class="widget-title">',
+      'after_title' => '</h2>',
+    )
+  );
 }
 
 add_action('widgets_init', 'prime_minister_widgets_init');
@@ -265,7 +287,6 @@ function prime_minister_posts_nav()
 
 }
 
-// Custom post type function
 function create_posttype()
 {
 

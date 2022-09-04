@@ -89,6 +89,9 @@
               <!-- FOOTER SOCIAL END -->
 
               <!-- FOOTER ADDRESS START -->
+              <?php if(is_active_sidebar('footer_info')) :?>
+                <?php dynamic_sidebar( 'footer_info' ); ?>
+              <?php else: ;?>
               <address class="site-footer__address">
                 <div class="site-footer__address__title">
                   THE PRIME MINISTER
@@ -96,11 +99,15 @@
                 <p class="site-footer__address__text">Prime Minister's Office</p>
                 <p class="site-footer__address__text">Seif Palace - Kuwait</p>
               </address>
+              <?php endif ;?>
               <!-- FOOTER ADDRESS END -->
 
               <!-- FOOTER TEXT LOGO -->
               <a class="site-footer__text-logo" href="<?php echo get_home_url() ?>">
-                pm.gov.kw
+                <?php
+                  $url = preg_replace("(^https?://)", "", esc_html( get_bloginfo( 'url' ) ) );
+                  echo $url;
+                ?>
               </a>
               <!-- FOOTER TEXT LOGO -->
             </div>

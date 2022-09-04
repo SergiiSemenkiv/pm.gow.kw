@@ -38,7 +38,28 @@
             <?php prime_minister_entry_footer(); ?>
           </section>
         </div>
-        {{> sidebar }}
+        <?php
+        $current_post_id = get_the_ID();
+        $the_query = new WP_Query(array(
+          'posts_per_page' => 4,
+          'post__not_in' => [$current_post_id]
+        ));
+        ?>
+        <?php if ($the_query->have_posts()) : ?>
+          <div class="col-12 col-xl-3 site-sidebar__column">
+            <div class="site-sidebar">
+              <ul class="site-sidebar__list">
+                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+                  <li class="site-sidebar__item">
+                    <a href="<?php the_permalink() ?>" class="sidebar__link">
+                      <?php echo get_the_excerpt(); ?>
+                    </a>
+                  </li>
+                <?php endwhile; ?>
+              </ul>
+            </div>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </main>

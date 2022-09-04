@@ -35,7 +35,7 @@
             <?php prime_minister_entry_footer(); ?>
           </section>
         </div>
-        {{> sidebar }}
+        <?php get_sidebar('administration'); ?>
       </div>
     </div>
   </main>

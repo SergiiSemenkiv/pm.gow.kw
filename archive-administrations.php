@@ -66,8 +66,8 @@ $the_query = new WP_Query(array(
               <?php endwhile; ?>
             </ul>
           <?php endif; ?>
-          <?php wp_reset_query(); ?>
         </div>
       </section>
     </main>
+<?php wp_reset_query(); ?>
 <?php get_footer('simple'); ?>
