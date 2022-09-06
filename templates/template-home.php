@@ -28,10 +28,7 @@ while (have_posts()) :
           <div class="container hero__content__container">
             <div class="row">
               <div class="col-12 col-lg-5">
-                <h1 class="home__topper__title">
-                  The Build Back
-                  Better Agenda
-                </h1>
+                <h1 class="home__topper__title"><?php the_field('hero_title'); ?></h1>
                 <div class="home__topper__links">
                   <nav class="home__topper__menu">
                     <?php

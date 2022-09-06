@@ -39,20 +39,14 @@ function prime_minister_latest_sticky_section(): string
       $i++;
     }
 
-    function make_articles_column($articles): string
-    {
-      if (!$articles) return '';
-      return '<div class="col-xs-12 col-xl-4 home-news__column">'. $articles .'</div>';
-    }
+    $first_column =  $first_column_articles ? '<div class="col-xs-12 col-xl-4 home-news__column">' . $first_column_articles. '</div>' : '';
+    $second_column =  $second_column_articles ? '<div class="col-xs-12 col-xl-4 home-news__column">' . $second_column_articles. '</div>' : '';
+    $third_column =  $third_column_articles ? '<div class="col-xs-12 col-xl-4 home-news__column">' . $third_column_articles. '</div>' : '';
 
     $return .= '
       <section class="home-news">
         <div class="container">
-          <div class="row">' .
-            make_articles_column($first_column_articles) .
-            make_articles_column($second_column_articles) .
-            make_articles_column($third_column_articles) .
-          '</div>
+          <div class="row">' . $first_column . $second_column . $third_column  . '</div>
         </div>
       </section>';
   }

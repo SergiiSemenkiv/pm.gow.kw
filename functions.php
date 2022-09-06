@@ -143,8 +143,19 @@ function prime_minister_widgets_init()
   );
   register_sidebar(
     array(
-      'name' => esc_html__('Footer Widgets Area', 'prime-minister'),
-      'id' => 'footer_widget_area',
+      'name' => esc_html__('Footer Top Content', 'prime-minister'),
+      'id' => 'footer_top_widgets',
+      'description' => esc_html__('Add widgets here.', 'prime-minister'),
+      'before_widget' => '',
+      'after_widget' => '',
+      'before_title' => '<h2 class="widget-title">',
+      'after_title' => '</h2>',
+    )
+  );
+  register_sidebar(
+    array(
+      'name' => esc_html__('Static Footer Top Content', 'prime-minister'),
+      'id' => 'footer_static_top_widgets',
       'description' => esc_html__('Add widgets here.', 'prime-minister'),
       'before_widget' => '',
       'after_widget' => '',
