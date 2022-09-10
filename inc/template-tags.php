@@ -185,6 +185,21 @@ if (!function_exists('prime_minister_post_category_link')) :
   }
 endif;
 
+if (!function_exists('prime_minister_post_archive_link')) :
+  /**
+   * Prints HTML with category information for the current post-date/time.
+   */
+  function prime_minister_post_archive_link($classes = '')
+  {
+    $post_type = get_post_type();
+    $post_type_link = get_post_type_archive_link($post_type);
+    if (!empty($post_type_link)) {
+      $archive_title = $post_type == 'administration' ? get_field('administration_page_title', 'option') : post_type_archive_title('', false);
+      echo '<a class="' . $classes . '" href="' . $post_type_link . '">' . esc_html($archive_title) . '</a>';
+    }
+  }
+endif;
+
 if (!function_exists('prime_minister_page_for_post_link')) :
 /**
  * Prints HTML with category information for the current post-date/time.

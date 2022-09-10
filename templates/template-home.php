@@ -10,6 +10,13 @@ while (have_posts()) :
       <div class="hero__wrapper">
         <div>
           <div class="hero__image__wrapper">
+            <?php
+            $image = get_field('hero_image');
+            $size = 'full';
+            if ($image) {
+              echo wp_get_attachment_image($image, $size, false, array('class' => 'hero__image'));
+            }
+            ?>
             <?php the_post_thumbnail('post-thumbnail', array('class' => 'hero__image')); ?>
             <?php if (get_field('welcome_title')): ?>
               <div class="home__welcome">

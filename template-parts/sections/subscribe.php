@@ -1,4 +1,3 @@
-<!-- MODULE Connected START -->
 <section class="module-connected">
   <div class="site-bottom__item-inner">
     <div class="container">
@@ -18,20 +17,21 @@
           </svg>
         </div>
         <div class="col-12 col-xl-6">
-          <h2 class="module-connected__title">Stay Connected</h2>
+          <h2 class="module-connected__title"><?php the_field('theme_subscribe_title', 'option'); ?></h2>
           <form action="https://gmail.us18.list-manage.com/subscribe/post?u=867543fd9c81f70ee35322330&amp;id=cd9025a70c&amp;f_id=008d65e7f0" method="post"
                 class="module-connected__form">
             <fieldset class="module-connected__fieldset">
               <div class="field-group">
-                <label class="module-connected__label">EMAIL ADDRESS*</label>
-                <input class="module-connected__input" type="email" name="EMAIL" placeholder="example@website.com" required>
+                <label class="module-connected__label"><?php the_field('subscribe_section_label', 'option'); ?></label>
+                <input class="module-connected__input" type="email" name="EMAIL" placeholder="<?php the_field('subscribe_section_placeholder', 'option'); ?>" required>
               </div>
-              <button class="module-connected__button" type="submit">SIGN UP</button>
+              <button class="module-connected__button" type="submit"><?php the_field('subscribe_section_button', 'option'); ?></button>
             </fieldset>
-            <div class="module-connected__error-message">THERE WAS AN ERROR PROCESSING YOUR EMAIL.</div>
+            <div class="module-connected__error-message">
+              <?php the_field('subscribe_section_success_message', 'option');?>
+            </div>
             <div class="module-connected__success-message">
-              We'll be in touch with the latest information on how President Biden and his administration are working for
-              the American people, as well as ways you can get involved and help our country build back better.
+              <?php the_field('subscribe_section_success_message', 'option');?>
             </div>
           </form>
         </div>
@@ -39,4 +39,3 @@
     </div>
   </div>
 </section>
-<!-- MODULE Connected End -->

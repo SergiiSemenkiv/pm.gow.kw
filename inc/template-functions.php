@@ -22,7 +22,7 @@ function prime_minister_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-  if( (is_home() || is_archive()) && !is_post_type_archive('administrations') ) {
+  if( (is_home() || is_archive()) && !is_post_type_archive('administration') ) {
     $classes[] = 'page-primary';
   }
 

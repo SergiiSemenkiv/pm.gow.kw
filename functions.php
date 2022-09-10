@@ -99,8 +99,8 @@ function prime_minister_setup()
   add_theme_support(
     'custom-logo',
     array(
-      'height' => 250,
-      'width' => 250,
+      'height' => 75,
+      'width' => 85,
       'flex-width' => true,
       'flex-height' => true,
     )
@@ -141,39 +141,6 @@ function prime_minister_widgets_init()
       'after_title' => '</h2>',
     )
   );
-  register_sidebar(
-    array(
-      'name' => esc_html__('Footer Top Content', 'prime-minister'),
-      'id' => 'footer_top_widgets',
-      'description' => esc_html__('Add widgets here.', 'prime-minister'),
-      'before_widget' => '',
-      'after_widget' => '',
-      'before_title' => '<h2 class="widget-title">',
-      'after_title' => '</h2>',
-    )
-  );
-  register_sidebar(
-    array(
-      'name' => esc_html__('Static Footer Top Content', 'prime-minister'),
-      'id' => 'footer_static_top_widgets',
-      'description' => esc_html__('Add widgets here.', 'prime-minister'),
-      'before_widget' => '',
-      'after_widget' => '',
-      'before_title' => '<h2 class="widget-title">',
-      'after_title' => '</h2>',
-    )
-  );
-  register_sidebar(
-    array(
-      'name' => esc_html__('Footer Info', 'prime-minister'),
-      'id' => 'footer_info',
-      'description' => esc_html__('Add widgets here.', 'prime-minister'),
-      'before_widget' => '',
-      'after_widget' => '',
-      'before_title' => '<h2 class="widget-title">',
-      'after_title' => '</h2>',
-    )
-  );
 }
 
 add_action('widgets_init', 'prime_minister_widgets_init');
@@ -183,14 +150,18 @@ add_action('widgets_init', 'prime_minister_widgets_init');
  */
 function prime_minister_scripts()
 {
+  wp_enqueue_style('bootstrap-reboot', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-reboot.min.css');
+
+  if ( is_rtl() ) {
+    wp_enqueue_style('bootstrap-grid', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-grid.rtl.min.css');
+  } else {
+    wp_enqueue_style('bootstrap-grid', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-grid.min.css');
+  }
+  wp_style_add_data( 'bootstrap-grid', 'title', 'foo' );
+
   wp_enqueue_style('prime-minister-style', get_stylesheet_uri(), array(), _S_VERSION);
-  wp_style_add_data('prime-minister-style', 'rtl', 'replace');
 
   wp_enqueue_script('prime-minister-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
-
-  if (is_singular() && comments_open() && get_option('thread_comments')) {
-    wp_enqueue_script('comment-reply');
-  }
 }
 
 add_action('wp_enqueue_scripts', 'prime_minister_scripts');
@@ -224,8 +195,24 @@ if (defined('JETPACK__VERSION')) {
 
 show_admin_bar(false);
 
-require get_template_directory() . '/inc/latest-sticky.php';
+/**
+ * ACF integration
+ */
+require get_template_directory() . '/inc/acf-configuration.php';
 
+/**
+ * Theme shortcodes
+ */
+require get_template_directory() . '/inc/custom-shortcodes.php';
+
+/**
+ * Email subscribe
+ */
+require get_template_directory() . '/inc/email-subscribe-integration.php';
+
+/**
+ * Navigation customization
+ */
 function add_additional_class_on_li($classes, $item, $args)
 {
   if (isset($args->add_li_class)) {
@@ -233,9 +220,11 @@ function add_additional_class_on_li($classes, $item, $args)
   }
   return $classes;
 }
-
 add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
 
+/**
+ * Theme Pagination
+ */
 function prime_minister_posts_nav()
 {
 
@@ -298,29 +287,31 @@ function prime_minister_posts_nav()
 
 }
 
-function create_posttype()
-{
+/**
+ * Administration post type
+ */
+function create_posttype_administration() {
 
-  register_post_type('administrations',
-    // CPT Options
+  register_post_type( 'administration',
     array(
       'labels' => array(
-        'name' => __('Prime Minister Administrations'),
-        'singular_name' => __('Prime Minister Administration Member')
+        'name' => __( 'Administration members' ),
+        'singular_name' => __( 'Administration member' )
       ),
-      'supports' => array('title', 'editor', 'thumbnail',),
-      'taxonomies' => array('category'),
+      'supports' => array('title', 'editor',),
       'public' => true,
       'has_archive' => true,
-      'rewrite' => array('slug' => 'administrations'),
+      'rewrite' => array('slug' => 'administration'),
       'show_in_rest' => true,
     )
   );
 }
+add_action( 'init', 'create_posttype_administration' );
 
-// Hooking up our function to theme setup
-add_action('init', 'create_posttype');
 
+/**
+ * Heading options for categories, archive
+ */
 add_filter('get_the_archive_title', function () {
   $title = '';
   if (is_category()) {
@@ -336,20 +327,3 @@ add_filter('get_the_archive_title', function () {
   }
   return $title;
 });
-
-require get_template_directory() . '/inc/mailchimp-ajax-integration.php';
-
-add_action('acf/init', 'my_acf_blocks_init');
-function my_acf_blocks_init() {
-  // Check function exists.
-  if( function_exists('acf_register_block_type') ) {
-    // Register a testimonial block.
-    acf_register_block_type(array(
-      'name'              => 'testimonial',
-      'title'             => __('Testimonial'),
-      'description'       => __('A custom testimonial block.'),
-      'render_template'   => 'template-parts/blocks/testimonial/testimonial.php',
-      'category'          => 'formatting',
-    ));
-  }
-}

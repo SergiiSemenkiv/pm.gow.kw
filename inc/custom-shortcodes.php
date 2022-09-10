@@ -1,5 +1,19 @@
 <?php
-function prime_minister_latest_sticky_section(): string
+/**
+ * Theme: administration section
+ */
+function get_administration_section()
+{
+  ob_start();
+  get_template_part('template-parts/sections/administration');
+  return ob_get_clean();
+}
+add_shortcode('pm_administration_section', 'get_administration_section');
+
+/**
+ * Theme: sticky post section
+ */
+function get_latest_sticky_section(): string
 {
   /* Get all sticky posts */
   $sticky = get_option('sticky_posts');
@@ -56,5 +70,29 @@ function prime_minister_latest_sticky_section(): string
   return $return;
 
 }
+add_shortcode('pm_latest_sticky_section', 'get_latest_sticky_section');
 
-add_shortcode('pm_latest_sticky_section', 'prime_minister_latest_sticky_section');
+/**
+* Theme: statistics section
+ */
+function get_statistics_section() {
+  ob_start();
+  get_template_part('template-parts/sections/statistics');
+  return ob_get_clean();
+}
+add_shortcode('pm_statistics_section', 'get_statistics_section');
+
+/**
+ * Theme: subscribe section
+ */
+
+function get_subscribe_form(): string
+{
+  ob_start();
+  require get_template_directory() . get_template_part('template-parts/sections/subscribe');
+  return ob_get_clean();
+}
+
+add_shortcode('pm_subscribe_form_section', 'get_subscribe_form');
+
+?>

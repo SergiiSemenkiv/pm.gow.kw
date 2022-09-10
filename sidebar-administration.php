@@ -1,7 +1,7 @@
 <?php
 // query
 $the_query = new WP_Query(array(
-  'post_type' => 'administrations',
+  'post_type' => 'administration',
   'posts_per_page' => -1,
   'meta_key' => 'list_order',
   'orderby' => 'meta_value',
@@ -14,12 +14,13 @@ $the_query = new WP_Query(array(
   <div class="site-sidebar">
     <ul class="site-sidebar__list">
       <li class="site-sidebar__item">
+        <?php prime_minister_post_archive_link('sidebar__link'); ?>
         <?php prime_minister_post_category_link('sidebar__link'); ?>
       </li>
       <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
         <li class="site-sidebar__item">
           <a href="<?php the_permalink() ?>" class="sidebar__link">
-            <?php the_title(); ?> - <?php the_field('position'); ?>
+            <?php echo get_field('name') . ' - ' . get_field('position'); ?>
           </a>
         </li>
       <?php endwhile; ?>

@@ -11,14 +11,13 @@
 
 ?>
   </div>
-  <!--SITE MAIN END -->
   <div class="site-bottom">
-    <?php if(is_active_sidebar('footer_static_top_widgets')) :?>
-      <?php dynamic_sidebar( 'footer_static_top_widgets' ); ?>
-    <?php endif;?>
-    <?php get_template_part('template-parts/footer_navigation'); ?>
+    <div class="site-bottom">
+      <?php get_template_part( 'template-parts/sections/subscribe' ); ?>
+      <?php get_template_part( 'template-parts/footer/site-footer' ); ?>
+    </div>
   </div>
-</div><!-- #page -->
+</div>
 
 <?php wp_footer(); ?>
 
