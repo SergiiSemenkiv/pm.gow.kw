@@ -9,43 +9,60 @@
 
 get_header();
 ?>
-
-
-		<?php if ( have_posts() ) : ?>
-
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'prime-minister' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
-
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-
 <?php
-get_sidebar();
-get_footer();
+$settings_search_page = get_field('theme_search_page', 'option');
+?>
+<?php if (have_posts()) : ?>
+  <header class="page-heading">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 col">
+          <h1 class="page-title">
+            <?php echo $settings_search_page['title'] ?>
+          </h1>
+          <div class="page-title__deck">
+            <?php
+              $search_query = esc_html__(get_search_query());
+              echo $settings_search_page['subtitle'] . ': <i> "'. $search_query .'" </i>';
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="page-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6 mx-auto">
+          <div class="post__list">
+            <?php
+            while (have_posts()) :
+              the_post();
+              get_template_part('template-parts/content', 'search');
+            endwhile;
+            ?>
+          </div>
+          <?php prime_minister_posts_nav() ?>
+        </div>
+      </div>
+    </div>
+  </main>
+<?php
+else :
+?>
+
+  <header class="page-heading">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 col">
+          <h1 class="page-title">
+            <?php echo $settings_search_page['nothing_found'] ?>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </header>
+<?php
+endif; ?>
+
+<?php get_footer('simple'); ?>

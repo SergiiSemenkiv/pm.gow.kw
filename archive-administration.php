@@ -8,6 +8,8 @@ $the_query = new WP_Query(array(
   'order' => 'ASC'
 ));
 
+$settings_administration_page = get_field('theme_administration_page', 'option');
+
 ?>
   <!-- HERO START-->
   <section class="hero hero-from-lg hero-administration">
@@ -18,10 +20,10 @@ $the_query = new WP_Query(array(
             <div class="row justify-content-center">
               <div class="col-12 col-xl-6">
                 <h1 class="page-title hero-administration__title">
-                  <?php the_field('administration_page_title', 'option'); ?>
+                  <?php echo $settings_administration_page['title'] ?>
                 </h1>
                 <p class="hero-administration__message">
-                  <?php the_field('administration_page_description', 'option'); ?>
+                  <?php echo $settings_administration_page['message'] ?>
                 </p>
               </div>
             </div>
@@ -30,10 +32,9 @@ $the_query = new WP_Query(array(
         <div>
           <div class="hero__image__wrapper">
             <?php
-            $image = get_field('administration_page_hero_image', 'option');
-            $size = 'full';
+            $image = $settings_administration_page['image'];
             if ($image) {
-              echo wp_get_attachment_image($image, $size, false, array('class' => 'hero__image'));
+              echo wp_get_attachment_image($image, 'full', false, array('class' => 'hero__image'));
             }
             ?>
           </div>

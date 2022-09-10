@@ -15,7 +15,6 @@ $the_query = new WP_Query(array(
     <ul class="site-sidebar__list">
       <li class="site-sidebar__item">
         <?php prime_minister_post_archive_link('sidebar__link'); ?>
-        <?php prime_minister_post_category_link('sidebar__link'); ?>
       </li>
       <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
         <li class="site-sidebar__item">

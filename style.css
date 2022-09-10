@@ -288,6 +288,8 @@ h6, .h6 {
         line-height: 58px; } }
 .page-title-regular {
     color: #404040; }
+.page-title__deck {
+    margin: 15px 0 0; }
 
 .static-content {
     line-height: 30px;
@@ -1909,44 +1911,43 @@ button:hover,
     .page-primary .site-header__menu__item a {
         color: #FFFFFF; } }
 
-.news__list {
+.post__list {
     margin-bottom: 40px; }
-
-.news-item {
+.post__list__item {
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #BCE7FF; }
-.news-item:last-child {
+.post__list__item:last-child {
     border-bottom: none;
     margin-bottom: 0; }
-
-.news-item__link {
+.post__list__link {
     color: #404040; }
-.news-item__link:hover {
+.post__list__link:hover {
     text-decoration-color: currentColor; }
-.news-item__link:hover {
+.post__list__link:hover {
     color: #106A8D;
     text-decoration: underline; }
-@media (min-width: 1200px) {
-    .news-item__link {
-        color: #FFFFFF; }
-    .news-item__link:hover {
-        text-decoration-color: currentColor; }
-    .news-item__link:hover {
-        color: #FFFFFF;
-        text-decoration: underline;
-        text-decoration-color: #FFFFFF; } }
-
-.news-item__title {
+.post__list__title {
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 10px;
     font-weight: 400; }
 @media (min-width: 1200px) {
-    .news-item__title {
+    .post__list__title {
         font-size: 32px;
         line-height: 42px;
-        margin-bottom: 12px;
+        margin-bottom: 12px; } }
+@media (min-width: 1200px) {
+    .post__list--primary .post__list__link {
+        color: #FFFFFF; }
+    .post__list--primary .post__list__link:hover {
+        text-decoration-color: currentColor; }
+    .post__list--primary .post__list__link:hover {
+        color: #FFFFFF;
+        text-decoration: underline;
+        text-decoration-color: #FFFFFF; } }
+@media (min-width: 1200px) {
+    .post__list--primary .post__list__title {
         color: #FFFFFF; } }
 
 .error-page {

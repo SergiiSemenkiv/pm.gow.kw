@@ -8,26 +8,33 @@
  */
 
 get_header();
-$post_id = 84;
+?>
+
+<?php
+$settings_404_page = get_field('theme_404_page', 'option');
 ?>
   <section class="error-page">
     <div class="container">
       <div class="row">
         <div class="col">
-          <img class="error-page__image" src="<?php bloginfo('template_url'); ?>/assets/img/errors/page_not_found.svg"
-               alt="">
+          <?php
+          $image = $settings_404_page['image'];
+          if ($image) {
+            echo wp_get_attachment_image($image, 'full', false, array('class' => 'error-page__image'));
+          }
+          ?>
           <div class="error-page__inner">
             <div class="error-page__subtitle">
-              <?php the_field('404_error_subtitle', $post_id); ?>
+              <?php echo $settings_404_page['subtitle'] ?>
             </div>
             <div class="error-page__title">
-              <?php the_field('404_error_title', $post_id); ?>
+              <?php echo $settings_404_page['title'] ?>
             </div>
             <div class="error-page__message">
-              <?php the_field('404_error_message', $post_id); ?>
+              <?php echo $settings_404_page['message'] ?>
             </div>
             <a href="<?php echo get_home_url() ?>" class="button error-page__button">
-              <?php the_field('404_error_button', $post_id); ?>
+              <?php echo $settings_404_page['button_text'] ?>
             </a>
           </div>
         </div>
