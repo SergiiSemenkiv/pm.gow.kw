@@ -10,7 +10,10 @@
 get_header();
 ?>
 <?php
-$settings_search_page = get_field('theme_search_page', 'option');
+$theme_search_page = get_field('theme_search_page', 'option');
+$title = $theme_search_page['title'];
+$subtitle = $theme_search_page['subtitle'];
+$nothing_found = $theme_search_page['nothing_found'];
 ?>
 <?php if (have_posts()) : ?>
   <header class="page-heading">
@@ -18,12 +21,12 @@ $settings_search_page = get_field('theme_search_page', 'option');
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7 col">
           <h1 class="page-title">
-            <?php echo $settings_search_page['title'] ?>
+            <?php echo $title; ?>
           </h1>
           <div class="page-title__deck">
             <?php
               $search_query = esc_html__(get_search_query());
-              echo $settings_search_page['subtitle'] . ': <i> "'. $search_query .'" </i>';
+              echo $subtitle . ': <i> "'. $search_query .'" </i>';
             ?>
           </div>
         </div>
@@ -56,7 +59,7 @@ else :
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7 col">
           <h1 class="page-title">
-            <?php echo $settings_search_page['nothing_found'] ?>
+            <?php echo $nothing_found; ?>
           </h1>
         </div>
       </div>

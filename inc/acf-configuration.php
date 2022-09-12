@@ -19,28 +19,4 @@ if (function_exists('acf_add_options_page')) {
     'menu_title' => 'Theme Custom Sections Content',
     'parent_slug' => 'theme-general-settings',
   ));
-
-  acf_add_options_sub_page(array(
-    'page_title' => 'Administration Page',
-    'menu_title' => 'Administration Page',
-    'parent_slug' => 'theme-general-settings',
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title' => 'Statistics Section',
-    'menu_title' => 'Statistics Section',
-    'parent_slug' => 'theme-general-settings',
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title' => 'Administration Section',
-    'menu_title' => 'Administration Section',
-    'parent_slug' => 'theme-general-settings',
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title' => 'Subscribe Section',
-    'menu_title' => 'Subscribe Section',
-    'parent_slug' => 'theme-general-settings',
-  ));
 }

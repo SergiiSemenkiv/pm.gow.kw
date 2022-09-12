@@ -327,3 +327,11 @@ add_filter('get_the_archive_title', function () {
   }
   return $title;
 });
+
+/**
+ *  Unregister posts tag from current theme
+ */
+function prime_minister_unregister_tags() {
+  unregister_taxonomy_for_object_type('post_tag', 'post');
+}
+add_action('init', 'prime_minister_unregister_tags');
