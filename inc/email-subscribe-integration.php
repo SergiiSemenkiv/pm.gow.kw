@@ -18,8 +18,10 @@ function subscribe_user()
   global $wpdb;
   check_ajax_referer('subscribe_user', 'security');
   $email = esc_sql(filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL));
+  $language = esc_sql(filter_var(trim($_POST['language']), FILTER_SANITIZE_STRING));
+
   $success = false;
-  $response_message = 'An unexpected error occurred';
+  $response_message = 'Unexpected error';
   $table_name = $wpdb->prefix . 'email_subscribers';
 
   $is_email_exist_in_db = $wpdb->get_var("SELECT ID FROM $table_name WHERE email = '$email'");
@@ -29,21 +31,22 @@ function subscribe_user()
       $table_name,
       array(
         'email' => $email,
-        'locale' => apply_filters( 'wpml_current_language', null ),
+        'language' => $language,
       )
     );
     if($db_insert_check) {
       $success = true;
-      $response_message = 'Email has been saved successfully';
+      $response_message = 'Success';
     }
   } else {
-    $response_message = 'Duplicate email is not allowed';
+    $success = true;
+    $response_message = 'Skip as already exist';
   }
 
   wp_send_json([
     'success' => $success,
     'message' => $response_message,
-    'locale' => apply_filters( 'wpml_current_language', null ),
+    'language' => $language,
   ]);
 
   wp_die();

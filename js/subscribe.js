@@ -18,7 +18,6 @@ jQuery(function ($) {
                 if (response.success) {
                     $form.addClass(formSuccessClass);
                 } else {
-                    console.log(response);
                     $form.addClass(formErrorClass);
                 }
                 $form.removeClass(formLoadingClass);

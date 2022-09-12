@@ -26,9 +26,6 @@
       </div>
     </div>
   </main>
-<?php
-else :
-//  ToDO add empty content page
-endif; ?>
+<?php endif; ?>
 
 <?php get_footer(); ?>

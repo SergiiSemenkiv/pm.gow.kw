@@ -38,16 +38,17 @@ $error_message = $theme_subscribe_section['error_message'];
                   <?php echo $label; ?>
                 </label>
                 <input class="module-connected__input" type="email" name="EMAIL" placeholder="<?php echo $placeholder; ?>" required>
+                <input type="hidden" name="LANGUAGE" value="<?php echo apply_filters( 'wpml_current_language', null ) ?>" required>
               </div>
               <button class="module-connected__button" type="submit">
                 <?php echo $button; ?>
               </button>
             </fieldset>
             <div class="module-connected__error-message">
-              <?php echo $success_message; ?>
+              <?php echo $error_message; ?>
             </div>
             <div class="module-connected__success-message">
-              <?php echo $error_message; ?>
+              <?php echo $success_message; ?>
             </div>
           </form>
         </div>
