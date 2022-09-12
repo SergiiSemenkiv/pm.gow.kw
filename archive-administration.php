@@ -8,23 +8,27 @@ $the_query = new WP_Query(array(
   'order' => 'ASC'
 ));
 
-$settings_administration_page = get_field('theme_administration_page', 'option');
-
+$theme_administration_page = get_field('theme_administration_page', 'option');
+$message = $theme_administration_page['message'];
+$hero_title = $theme_administration_page['hero_title'];
+$image = $theme_administration_page['hero_image'];
 ?>
   <!-- HERO START-->
   <section class="hero hero-from-lg hero-administration">
-    <div class="container-fluid">
+    <div class="container-fluid hero__container">
       <div class="hero__wrapper">
-        <div class="hero__content ">
-          <div class="hero__content__container">
-            <div class="row justify-content-center">
-              <div class="col-12 col-xl-6">
-                <h1 class="page-title hero-administration__title">
-                  <?php echo $settings_administration_page['title'] ?>
-                </h1>
-                <p class="hero-administration__message">
-                  <?php echo $settings_administration_page['message'] ?>
-                </p>
+        <div class="hero__content home__topper hero__ratio-box">
+          <div class="hero__ratio-box__inside">
+            <div class="hero__content__container">
+              <div class="row justify-content-center">
+                <div class="col-12 col-xl-6">
+                  <h1 class="page-title hero-administration__title">
+                    <?php echo $hero_title; ?>
+                  </h1>
+                  <p class="hero-administration__message">
+                    <?php echo $message ?>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -32,7 +36,6 @@ $settings_administration_page = get_field('theme_administration_page', 'option')
         <div>
           <div class="hero__image__wrapper">
             <?php
-            $image = $settings_administration_page['image'];
             if ($image) {
               echo wp_get_attachment_image($image, 'full', false, array('class' => 'hero__image'));
             }

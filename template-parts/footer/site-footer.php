@@ -1,3 +1,9 @@
+<?php
+$theme_site_domain = get_field('theme_site_domain', 'option');
+$theme_office_address_title = get_field('theme_office_address_title', 'option');
+$theme_office_address = get_field('theme_office_address', 'option');
+?>
+
 <!--FOOTER START-->
 <footer class="site-footer">
   <div class="site-bottom__item-inner">
@@ -98,22 +104,17 @@
               <!-- FOOTER ADDRESS START -->
               <address class="site-footer__address">
                 <div class="site-footer__address__title">
-                  <?php the_field('address_title', 'option') ?>
+                  <?php echo $theme_office_address_title; ?>
                 </div>
-                <?php if (have_rows('address', 'option')): ?>
-                  <?php while (have_rows('address', 'option')) : the_row(); ?>
-                    <p class="site-footer__address__text"><?php the_sub_field('address_line', 'option'); ?></p>
-                  <?php endwhile; ?>
-                <?php endif; ?>
+                <p class="site-footer__address__text">
+                  <?php echo $theme_office_address; ?>
+                </p>
               </address>
               <!-- FOOTER ADDRESS END -->
 
               <!-- FOOTER TEXT LOGO -->
               <a class="site-footer__text-logo" href="<?php echo get_home_url() ?>">
-                <?php
-                $url = parse_url(esc_html(get_bloginfo('url')));
-                echo $url['host'];
-                ?>
+                <?php echo $theme_site_domain; ?>
               </a>
               <!-- FOOTER TEXT LOGO -->
             </div>

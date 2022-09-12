@@ -8,13 +8,16 @@ $the_query = new WP_Query(array(
   'order' => 'ASC'
 ));
 
+$theme_administration_page = get_field('theme_administration_page', 'option');
+$administration_page_title = $theme_administration_page['title'];
+
 ?>
 <?php if ($the_query->have_posts()): ?>
 <div class="col-12 col-xl-3 site-sidebar__column">
   <div class="site-sidebar">
     <ul class="site-sidebar__list">
       <li class="site-sidebar__item">
-        <?php prime_minister_post_archive_link('sidebar__link'); ?>
+        <?php prime_minister_post_archive_link('sidebar__link', $administration_page_title); ?>
       </li>
       <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
         <li class="site-sidebar__item">

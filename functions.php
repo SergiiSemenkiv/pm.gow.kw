@@ -51,10 +51,10 @@ function prime_minister_setup()
   register_nav_menus(
     array(
       'header_menu' => 'Header Menu',
-      'home_hero_menu' => 'Home hero menu',
+      'home_hero_menu' => 'Home Hero menu',
       'footer_menu_column_1' => 'Footer Menu First Column',
       'footer_menu_column_2' => 'Footer Menu Second Column',
-      'footer_static_pages_menu' => 'Footer Static Pages Menu',
+      'footer_static_pages_menu' => 'Footer Menu Static Pages',
       'social_menu' => 'Social Menu',
     )
   );

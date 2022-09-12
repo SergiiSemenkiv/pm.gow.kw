@@ -13,74 +13,31 @@ function subscribe_user_scripts()
 
 add_action('wp_enqueue_scripts', 'subscribe_user_scripts');
 
-function subscribe_user_mailchimp($email)
-{
-  define('API_KEY', '205dbd228f1684ff7d7521ed69a51949-us18');
-  define('AUDIENCE_ID', 'cd9025a70c');
-  $api_key = '205dbd228f1684ff7d7521ed69a51949-us18';
-  $data_center = substr($api_key, strpos($api_key, '-')+1);
-//  $data_center = substr(API_KEY, strpos(API_KEY, '-') + 1);
-  $url = 'https://' . $data_center . '.api.mailchimp.com/3.0/lists/' . AUDIENCE_ID . '/members';
-  $auth = base64_encode('user:' . $api_key);
-  $arr_data = json_encode(array(
-    'email_address' => $email,
-    'status' => 'subscribed', //pass 'subscribed' or 'pending'
-  ));
-
-  return wp_remote_post($url, array(
-    'method' => 'POST',
-    'headers' => array(
-      'Content-Type' => 'application/json',
-      'Authorization' => "Basic $auth"
-    ),
-    'body' => $arr_data,
-  ));
-}
-
 function subscribe_user()
 {
   global $wpdb;
   check_ajax_referer('subscribe_user', 'security');
   $email = esc_sql(filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL));
   $success = false;
-  $response_message = '';
-  $table_name = $wpdb->prefix . 'subscribers';
+  $response_message = 'An unexpected error occurred';
+  $table_name = $wpdb->prefix . 'email_subscribers';
 
-  $isEmailExistDb = $wpdb->get_var("SELECT ID FROM $table_name WHERE email = '$email'");
+  $is_email_exist_in_db = $wpdb->get_var("SELECT ID FROM $table_name WHERE email = '$email'");
 
-  if ($isEmailExistDb == NULL) {
-
-    $response = subscribe_user_mailchimp($email);
-
-    if (is_wp_error($response)) {
-      $response_message = $response->get_error_message();
-    } else {
-      $status_code = wp_remote_retrieve_response_code($response);
-      switch ($status_code) {
-        case '200':
-          $success = true;
-          break;
-        case '400':
-          $api_response = json_decode(wp_remote_retrieve_body($response), true);
-          $response_message = $api_response['title'];
-          break;
-        default:
-          $response_message = $status_code;
-          break;
-      }
-    }
-  } else {
-    $response_message = 'Duplicate email is not allowed';
-  }
-
-  if ($success) {
-    $wpdb->insert(
+  if ($is_email_exist_in_db == NULL) {
+    $db_insert_check = $wpdb->insert(
       $table_name,
       array(
         'email' => $email,
         'locale' => apply_filters( 'wpml_current_language', null ),
       )
     );
+    if($db_insert_check) {
+      $success = true;
+      $response_message = 'Email has been saved successfully';
+    }
+  } else {
+    $response_message = 'Duplicate email is not allowed';
   }
 
   wp_send_json([

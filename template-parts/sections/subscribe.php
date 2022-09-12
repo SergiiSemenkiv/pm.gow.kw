@@ -1,3 +1,13 @@
+<?php
+$theme_subscribe_section = get_field('theme_subscribe_section', 'option');
+$title = $theme_subscribe_section['title'];
+$label = $theme_subscribe_section['label'];
+$placeholder = $theme_subscribe_section['placeholder'];
+$button = $theme_subscribe_section['button'];
+$success_message = $theme_subscribe_section['success_message'];
+$error_message = $theme_subscribe_section['error_message'];
+?>
+
 <section class="module-connected">
   <div class="site-bottom__item-inner">
     <div class="container">
@@ -17,21 +27,27 @@
           </svg>
         </div>
         <div class="col-12 col-xl-6">
-          <h2 class="module-connected__title"><?php the_field('theme_subscribe_title', 'option'); ?></h2>
+          <h2 class="module-connected__title">
+            <?php echo $title; ?>
+          </h2>
           <form action="https://gmail.us18.list-manage.com/subscribe/post?u=867543fd9c81f70ee35322330&amp;id=cd9025a70c&amp;f_id=008d65e7f0" method="post"
                 class="module-connected__form">
             <fieldset class="module-connected__fieldset">
               <div class="field-group">
-                <label class="module-connected__label"><?php the_field('subscribe_section_label', 'option'); ?></label>
-                <input class="module-connected__input" type="email" name="EMAIL" placeholder="<?php the_field('subscribe_section_placeholder', 'option'); ?>" required>
+                <label class="module-connected__label">
+                  <?php echo $label; ?>
+                </label>
+                <input class="module-connected__input" type="email" name="EMAIL" placeholder="<?php echo $placeholder; ?>" required>
               </div>
-              <button class="module-connected__button" type="submit"><?php the_field('subscribe_section_button', 'option'); ?></button>
+              <button class="module-connected__button" type="submit">
+                <?php echo $button; ?>
+              </button>
             </fieldset>
             <div class="module-connected__error-message">
-              <?php the_field('subscribe_section_success_message', 'option');?>
+              <?php echo $success_message; ?>
             </div>
             <div class="module-connected__success-message">
-              <?php the_field('subscribe_section_success_message', 'option');?>
+              <?php echo $error_message; ?>
             </div>
           </form>
         </div>

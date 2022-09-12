@@ -1,3 +1,11 @@
+<?php
+$theme_administration_section = get_field('theme_administration_section', 'option');
+$image = $theme_administration_section['image'];
+$top_subtitle = $theme_administration_section['top_subtitle'];
+$title = $theme_administration_section['title'];
+$message = $theme_administration_section['message'];
+?>
+
 <!-- MODULE Administration START -->
 <section class="module-administration rtl-ignore">
   <div class="module-administration__wrap site-bottom__item-inner">
@@ -5,7 +13,6 @@
       <div class="module-administration__img__column">
         <div class="module-administration__img">
           <?php
-          $image = get_field('administration_section_image', 'option');
           if( !empty( $image ) ): ?>
             <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
           <?php endif; ?>
@@ -15,17 +22,17 @@
         <div class="module-administration__content__wrap">
           <div class="module-administration__content">
             <h5 class="text-primary">
-              <?php the_field('administration_section_top_subtitle', 'option'); ?>
+              <?php echo $top_subtitle; ?>
             </h5>
             <h2 class="module-administration__title">
-              <?php the_field('administration_section_title', 'option'); ?>
+              <?php echo $title; ?>
             </h2>
             <p class="module-administration__text">
-              <?php the_field('administration_section_message', 'option'); ?>
+              <?php echo $message; ?>
             </p>
-            <?php if (have_rows('administration_section_link_list', 'option')): ?>
+            <?php while ( have_rows( 'theme_administration_section', 'option' ) ) : the_row(); ?>
               <ul class="module-administration__list link-styled-list">
-                <?php while (have_rows('administration_section_link_list', 'option')) : the_row(); ?>
+                <?php while (have_rows('link_list')) : the_row(); ?>
                   <?php
                   $link = get_sub_field('list_item');
                   if ($link) :
@@ -42,7 +49,7 @@
                   <?php endif; ?>
                 <?php endwhile; ?>
               </ul>
-            <?php endif; ?>
+            <?php endwhile; ?>
           </div>
         </div>
       </div>
