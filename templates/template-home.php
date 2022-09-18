@@ -17,12 +17,12 @@ while (have_posts()) :
               echo wp_get_attachment_image($image, $size, false, array('class' => 'hero__image'));
             }
             ?>
-            <?php if (get_field('welcome_title')): ?>
+            <?php if (get_field('welcome_text')): ?>
               <div class="home__welcome">
                 <div class="container">
                   <div class="row">
                     <div class="home__welcome__inner">
-                      <p><?php the_field('welcome_title'); ?></p>
+                      <p><?php the_field('welcome_text'); ?></p>
                     </div>
                   </div>
                 </div>

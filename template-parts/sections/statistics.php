@@ -1,19 +1,20 @@
 <?php
 $theme_statistics_section = get_field('theme_statistics_section', 'option');
-$progress_title = $theme_statistics_section['progress_title'];
-$progress_value = $theme_statistics_section['progress_value'];
-$progress_text = $theme_statistics_section['progress_text'];
-$progress_link = $theme_statistics_section['progress_link'];
-$stat_title = $theme_statistics_section['stat_title'];
-$stat_value = $theme_statistics_section['stat_value'];
-$stat_value_subtext = $theme_statistics_section['stat_value_subtext'];
-?>
 
+if ($theme_statistics_section) :
+  $progress_title = $theme_statistics_section['progress_title'];
+  $progress_value = $theme_statistics_section['progress_value'];
+  $progress_text = $theme_statistics_section['progress_text'];
+  $progress_link = $theme_statistics_section['progress_link'];
+  $stat_title = $theme_statistics_section['stat_title'];
+  $stat_value = $theme_statistics_section['stat_value'];
+  $stat_value_subtext = $theme_statistics_section['stat_value_subtext'];
+?>
 <section class="home__statistic">
   <div class="container">
     <div class="home__statistic__inner">
       <div class="row">
-        <div class="col-12 g-lg-0 col-lg-auto">
+        <div class="col-12 col-lg-auto home__statistic__progress__column">
           <div class="home__statistic__progress">
             <h2 class="home__statistic__progress__title"><?php echo $progress_title; ?></h2>
             <div class="d-flex align-items-center">
@@ -33,17 +34,17 @@ $stat_value_subtext = $theme_statistics_section['stat_value_subtext'];
             <?php endif; ?>
           </div>
         </div>
-        <div class="col-12 g-lg-0 col-lg">
+        <div class="col-12 col-lg">
           <div class="home__statistic__stat">
             <h3 class="home__statistic__stat__title"><?php echo $stat_title; ?></h3>
-            <div class="home__statistic__stat__data">
+            <div class="home__statistic__stat__data rtl-ignore">
               <span class="home__statistic__stat__value">
                 <?php echo $stat_value; ?>
               </span>
               <?php echo $stat_value_subtext; ?>
             </div>
             <?php while ( have_rows( 'theme_statistics_section', 'option' ) ) : the_row(); ?>
-              <div class="home__statistic__timeline">
+              <div class="home__statistic__timeline rtl-ignore">
                 <div class="home__statistic__timeline__placeholder">
                   <span class="home__statistic__timeline__line"></span>
                 </div>
@@ -67,3 +68,4 @@ $stat_value_subtext = $theme_statistics_section['stat_value_subtext'];
     </div>
   </div>
 </section>
+<?php endif ?>

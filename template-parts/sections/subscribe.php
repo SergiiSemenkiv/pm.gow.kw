@@ -1,5 +1,7 @@
 <?php
 $theme_subscribe_section = get_field('theme_subscribe_section', 'option');
+
+if ($theme_subscribe_section) :
 $title = $theme_subscribe_section['title'];
 $label = $theme_subscribe_section['label'];
 $placeholder = $theme_subscribe_section['placeholder'];
@@ -56,3 +58,4 @@ $error_message = $theme_subscribe_section['error_message'];
     </div>
   </div>
 </section>
+<?php endif; ?>

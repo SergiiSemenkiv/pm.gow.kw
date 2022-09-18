@@ -1,5 +1,7 @@
 <?php
 $theme_administration_section = get_field('theme_administration_section', 'option');
+
+if ($theme_administration_section) :
 $image = $theme_administration_section['image'];
 $top_subtitle = $theme_administration_section['top_subtitle'];
 $title = $theme_administration_section['title'];
@@ -7,7 +9,7 @@ $message = $theme_administration_section['message'];
 ?>
 
 <!-- MODULE Administration START -->
-<section class="module-administration rtl-ignore">
+<section class="module-administration">
   <div class="module-administration__wrap site-bottom__item-inner">
     <div class="module-administration__row">
       <div class="module-administration__img__column">
@@ -57,3 +59,4 @@ $message = $theme_administration_section['message'];
   </div>
 </section>
 <!-- MODULE Administration END -->
+<?php endif ?>

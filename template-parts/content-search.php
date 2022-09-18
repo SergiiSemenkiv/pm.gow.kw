@@ -11,7 +11,7 @@
 
 <article id="post-<?php the_ID(); ?>" class="post__list__item">
   <h2 class="post__list__title">
-    <?php $post_title = get_the_excerpt() ?>
+    <?php $post_title = has_excerpt() ? get_the_excerpt() : get_the_title() ?>
     <a href="<?php the_permalink() ?>" rel="bookmark" class="post__list__link">
       <?php the_excerpt() ?>
     </a>

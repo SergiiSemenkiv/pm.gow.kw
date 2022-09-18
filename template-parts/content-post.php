@@ -52,7 +52,9 @@
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                   <li class="site-sidebar__item">
                     <a href="<?php the_permalink() ?>" class="sidebar__link">
-                      <?php echo get_the_excerpt(); ?>
+                      <?php
+                      $post_title = has_excerpt() ? get_the_excerpt() : get_the_title();
+                        echo $post_title; ?>
                     </a>
                   </li>
                 <?php endwhile; ?>
